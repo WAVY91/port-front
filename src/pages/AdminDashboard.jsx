@@ -32,7 +32,7 @@ const AdminDashboard = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/projects');
+      const response = await axios.get('https://port-back-wyco.onrender.com/api/projects');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -60,11 +60,11 @@ const AdminDashboard = () => {
       };
 
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/projects/${editingId}`, payload, {
+        await axios.put(`https://port-back-wyco.onrender.com/api/projects/${editingId}`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post('http://localhost:5000/api/projects', payload, {
+        await axios.post('https://port-back-wyco.onrender.com/api/projects', payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -106,7 +106,7 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`http://localhost:5000/api/projects/${id}`, {
+        await axios.delete(`https://port-back-wyco.onrender.com/api/projects/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         fetchProjects();

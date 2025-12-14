@@ -35,7 +35,7 @@ const AdminLogin = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/admin/login', formData);
+      const response = await axios.post('https://port-back-wyco.onrender.com/api/admin/login', formData);
       localStorage.setItem('adminToken', response.data.token);
       navigate('/admin/dashboard');
     } catch (err) {

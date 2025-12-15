@@ -241,6 +241,166 @@
   transform: translateY(-2px);
 }
 
+.messages-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.admin-dashboard.dark .messages-section {
+  background-color: #1a1f3a;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.messages-section h2 {
+  color: #667eea;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.no-messages {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.6;
+  font-size: 1.1rem;
+}
+
+.messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message-item {
+  padding: 1.5rem;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-dashboard.light .message-item {
+  background-color: #f9f9f9;
+}
+
+.admin-dashboard.dark .message-item {
+  background-color: #0a0e27;
+  border-color: #2a2f4a;
+}
+
+.message-item:hover {
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+  transform: translateX(5px);
+  border-color: #667eea;
+}
+
+.message-preview h4 {
+  color: #667eea;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.sender {
+  opacity: 0.8;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-text {
+  opacity: 0.7;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.date {
+  opacity: 0.5;
+  font-size: 0.85rem;
+}
+
+.message-detail {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-detail h3 {
+  color: #667eea;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.message-info {
+  background-color: rgba(102, 126, 234, 0.05);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #667eea;
+}
+
+.admin-dashboard.dark .message-info {
+  background-color: rgba(102, 126, 234, 0.1);
+}
+
+.message-info p {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.message-info a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.message-info a:hover {
+  text-decoration: underline;
+}
+
+.message-body {
+  margin: 1.5rem 0;
+}
+
+.message-body h4 {
+  color: #667eea;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.message-body p {
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background-color: #667eea;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-secondary:hover {
+  background-color: #5568d3;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 1rem;
@@ -300,6 +460,39 @@
     flex: 1;
     padding: 0.5rem 0.8rem;
     font-size: 0.8rem;
+  }
+
+  .messages-section {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .messages-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .message-item {
+    padding: 1rem;
+  }
+
+  .message-preview h4 {
+    font-size: 1rem;
+  }
+
+  .message-preview .sender {
+    font-size: 0.85rem;
+  }
+
+  .message-preview .message-text {
+    font-size: 0.85rem;
+  }
+
+  .message-detail h3 {
+    font-size: 1.2rem;
+  }
+
+  .btn-secondary {
+    width: 100%;
   }
 }
 
@@ -397,5 +590,73 @@
   .btn-delete {
     padding: 0.5rem;
     font-size: 0.75rem;
+  }
+
+  .messages-section {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .messages-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .message-item {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .message-preview h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .sender {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .message-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .date {
+    font-size: 0.75rem;
+  }
+
+  .message-detail h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .message-info {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .message-info p {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .message-body {
+    margin: 1rem 0;
+  }
+
+  .message-body h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .message-body p {
+    font-size: 0.9rem;
+  }
+
+  .btn-secondary {
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
   }
 }

@@ -8,9 +8,11 @@ const AdminDashboard = () => {
   const { darkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -27,6 +29,7 @@ const AdminDashboard = () => {
       navigate('/admin');
     } else {
       fetchProjects();
+      fetchMessages();
     }
   }, [navigate]);
 
@@ -36,6 +39,33 @@ const AdminDashboard = () => {
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
+    }
+  };
+
+  const fetchMessages = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await axios.get('https://port-back-wyco.onrender.com/api/contact/all', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setMessages(response.data);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
+  };
+
+  const deleteMessage = async (id) => {
+    if (window.confirm('Are you sure you want to delete this message?')) {
+      try {
+        const token = localStorage.getItem('adminToken');
+        await axios.delete(`https://port-back-wyco.onrender.com/api/contact/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSelectedMessage(null);
+        fetchMessages();
+      } catch (error) {
+        alert('Error deleting message');
+      }
     }
   };
 
@@ -268,6 +298,45 @@ const AdminDashboard = () => {
                   <div className="project-actions">
                     <button className="btn btn-edit" onClick={() => handleEdit(project)}>Edit</button>
                     <button className="btn btn-delete" onClick={() => handleDelete(project._id)}>Delete</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="messages-section">
+          <h2>Contact Messages ({messages.length})</h2>
+          
+          {messages.length === 0 ? (
+            <p className="no-messages">No messages yet.</p>
+          ) : selectedMessage ? (
+            <div className="message-detail">
+              <button className="btn btn-secondary" onClick={() => setSelectedMessage(null)}>← Back to Messages</button>
+              <div className="message-content">
+                <h3>{selectedMessage.subject}</h3>
+                <div className="message-info">
+                  <p><strong>From:</strong> {selectedMessage.name}</p>
+                  <p><strong>Email:</strong> <a href={`mailto:${selectedMessage.email}`}>{selectedMessage.email}</a></p>
+                  {selectedMessage.phone && <p><strong>Phone:</strong> {selectedMessage.phone}</p>}
+                  <p><strong>Date:</strong> {new Date(selectedMessage.createdAt).toLocaleString()}</p>
+                </div>
+                <div className="message-body">
+                  <h4>Message:</h4>
+                  <p>{selectedMessage.message}</p>
+                </div>
+                <button className="btn btn-delete" onClick={() => deleteMessage(selectedMessage._id)}>Delete Message</button>
+              </div>
+            </div>
+          ) : (
+            <div className="messages-list">
+              {messages.map((msg) => (
+                <div key={msg._id} className="message-item" onClick={() => setSelectedMessage(msg)}>
+                  <div className="message-preview">
+                    <h4>{msg.subject}</h4>
+                    <p className="sender"><strong>{msg.name}</strong> ({msg.email})</p>
+                    <p className="message-text">{msg.message.substring(0, 100)}...</p>
+                    <p className="date">{new Date(msg.createdAt).toLocaleDateString()} {new Date(msg.createdAt).toLocaleTimeString()}</p>
                   </div>
                 </div>
               ))}

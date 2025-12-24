@@ -63,7 +63,7 @@ const AdminDashboard = () => {
         });
         setSelectedMessage(null);
         fetchMessages();
-      } catch (error) {
+      } catch {
         alert('Error deleting message');
       }
     }

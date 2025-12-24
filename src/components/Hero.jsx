@@ -5,10 +5,10 @@ import './Hero.css';
 const Hero = () => {
   const { darkMode } = useContext(ThemeContext);
 
-  const downloadResume = () => {
+  const downloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/resume/Resume.txt';
-    link.download = 'Resume.txt';
+    link.href = '/resume/CV.pdf';
+    link.download = 'CV.pdf';
     link.click();
   };
 
@@ -25,7 +25,7 @@ const Hero = () => {
         <div className="hero-buttons">
           <a href="#projects" className="btn btn-primary">View My Work</a>
           <a href="#contact" className="btn btn-secondary">Get In Touch</a>
-          <button onClick={downloadResume} className="btn btn-primary">📥 Download Resume</button>
+          <button onClick={downloadCV} className="btn btn-primary">📥 Download CV</button>
         </div>
       </div>
     </section>

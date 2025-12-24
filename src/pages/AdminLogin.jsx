@@ -13,6 +13,7 @@ const AdminLogin = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +27,7 @@ const AdminLogin = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     const ADMIN_EMAIL = 'timetomisin@gmail.com';
     if (formData.email !== ADMIN_EMAIL) {
@@ -37,10 +39,10 @@ const AdminLogin = () => {
     try {
       const response = await axios.post('https://port-back-wyco.onrender.com/api/admin/login', formData);
       localStorage.setItem('adminToken', response.data.token);
-      navigate('/admin/dashboard');
+      setSuccess('✓ Login successful! Redirecting to dashboard...');
+      setTimeout(() => navigate('/admin/dashboard'), 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Error logging in');
-    } finally {
       setLoading(false);
     }
   };
@@ -54,6 +56,7 @@ const AdminLogin = () => {
 
           <form onSubmit={handleSubmit}>
             {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
 
             <div className="form-group">
               <label htmlFor="email">Email</label>

@@ -14,6 +14,7 @@ const AdminRegister = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +27,7 @@ const AdminRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
     const ADMIN_EMAIL = "timetomisin@gmail.com";
     if (formData.email !== ADMIN_EMAIL) {
@@ -47,7 +49,8 @@ const AdminRegister = () => {
         email: formData.email,
         password: formData.password,
       });
-      navigate("/admin");
+      setSuccess("✓ Registration successful! Redirecting to login...");
+      setTimeout(() => navigate("/admin"), 2000);
     } catch (err) {
       const status = err.response?.status;
       const serverMessage =
@@ -78,6 +81,7 @@ const AdminRegister = () => {
 
           <form onSubmit={handleSubmit}>
             {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
 
             <div className="form-group">
               <label htmlFor="email">Email</label>

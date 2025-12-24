@@ -99,6 +99,16 @@
   font-size: 0.9rem;
 }
 
+.success-message {
+  padding: 0.8rem;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 .register-link {
   text-align: center;
   margin-top: 1rem;

@@ -31,7 +31,7 @@ const Contact = () => {
     setSuccess(false);
 
     try {
-      await axios.post('https://port-back-wyco.onrender.com/api/contact/send', formData);
+      await axios.post('https://port-back-jrb3.onrender.com/api/contact/send', formData);
       setSuccess(true);
       setFormData({
         name: '',

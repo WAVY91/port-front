@@ -52,7 +52,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('https://port-back-wyco.onrender.com/api/projects');
+        const response = await axios.get('https://port-back-jrb3.onrender.com/api/projects');
         if (response.data && response.data.length > 0) {
           setProjects(response.data);
         } else {

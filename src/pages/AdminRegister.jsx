@@ -42,7 +42,7 @@ const AdminRegister = () => {
 
     setLoading(true);
 
-    const API_BASE = import.meta.env.VITE_API_URL || "https://port-back-wyco.onrender.com";
+    const API_BASE = import.meta.env.VITE_API_URL || "https://port-back-jrb3.onrender.com";
 
     try {
       await axios.post(`${API_BASE}/api/admin/register`, {

@@ -35,7 +35,7 @@ const AdminDashboard = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('https://port-back-wyco.onrender.com/api/projects');
+      const response = await axios.get('https://port-back-jrb3.onrender.com/api/projects');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('https://port-back-wyco.onrender.com/api/contact/all', {
+      const response = await axios.get('https://port-back-jrb3.onrender.com/api/contact/all', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessages(response.data);
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this message?')) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`https://port-back-wyco.onrender.com/api/contact/${id}`, {
+        await axios.delete(`https://port-back-jrb3.onrender.com/api/contact/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setSelectedMessage(null);
@@ -90,11 +90,11 @@ const AdminDashboard = () => {
       };
 
       if (editingId) {
-        await axios.put(`https://port-back-wyco.onrender.com/api/projects/${editingId}`, payload, {
+        await axios.put(`https://port-back-jrb3.onrender.com/api/projects/${editingId}`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post('https://port-back-wyco.onrender.com/api/projects', payload, {
+        await axios.post('https://port-back-jrb3.onrender.com/api/projects', payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -136,7 +136,7 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`https://port-back-wyco.onrender.com/api/projects/${id}`, {
+        await axios.delete(`https://port-back-jrb3.onrender.com/api/projects/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         fetchProjects();

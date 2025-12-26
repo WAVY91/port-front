@@ -146,6 +146,20 @@ const AdminDashboard = () => {
     }
   };
 
+  const updateMessageStatus = async (id, attended) => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      await axios.patch(`https://port-back-jrb3.onrender.com/api/contact/${id}`, { attended }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const updatedMessage = { ...selectedMessage, attended };
+      setSelectedMessage(updatedMessage);
+      fetchMessages();
+    } catch {
+      alert('Error updating message status');
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     navigate('/admin');
@@ -315,6 +329,11 @@ const AdminDashboard = () => {
               <button className="btn btn-secondary" onClick={() => setSelectedMessage(null)}>← Back to Messages</button>
               <div className="message-content">
                 <h3>{selectedMessage.subject}</h3>
+                <div className="message-status">
+                  <span className={`status-badge ${selectedMessage.attended ? 'attended' : 'pending'}`}>
+                    {selectedMessage.attended ? '✓ Attended' : '○ Not Attended'}
+                  </span>
+                </div>
                 <div className="message-info">
                   <p><strong>From:</strong> {selectedMessage.name}</p>
                   <p><strong>Email:</strong> <a href={`mailto:${selectedMessage.email}`}>{selectedMessage.email}</a></p>
@@ -325,7 +344,15 @@ const AdminDashboard = () => {
                   <h4>Message:</h4>
                   <p>{selectedMessage.message}</p>
                 </div>
-                <button className="btn btn-delete" onClick={() => deleteMessage(selectedMessage._id)}>Delete Message</button>
+                <div className="message-actions">
+                  <button 
+                    className="btn btn-primary" 
+                    onClick={() => updateMessageStatus(selectedMessage._id, !selectedMessage.attended)}
+                  >
+                    {selectedMessage.attended ? 'Mark as Not Attended' : 'Mark as Attended'}
+                  </button>
+                  <button className="btn btn-delete" onClick={() => deleteMessage(selectedMessage._id)}>Delete Message</button>
+                </div>
               </div>
             </div>
           ) : (
@@ -333,7 +360,12 @@ const AdminDashboard = () => {
               {messages.map((msg) => (
                 <div key={msg._id} className="message-item" onClick={() => setSelectedMessage(msg)}>
                   <div className="message-preview">
-                    <h4>{msg.subject}</h4>
+                    <div className="message-header">
+                      <h4>{msg.subject}</h4>
+                      <span className={`status-badge ${msg.attended ? 'attended' : 'pending'}`}>
+                        {msg.attended ? '✓' : '○'}
+                      </span>
+                    </div>
                     <p className="sender"><strong>{msg.name}</strong> ({msg.email})</p>
                     <p className="message-text">{msg.message.substring(0, 100)}...</p>
                     <p className="date">{new Date(msg.createdAt).toLocaleDateString()} {new Date(msg.createdAt).toLocaleTimeString()}</p>
